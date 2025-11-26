@@ -170,7 +170,7 @@
             bindings =
                 <&kt LEFT_SHIFT>,
                 <&macro_wait_time 50>,
-                <&kp X &kt LEFT_SHIFT &kp Z &kp G &kp Z &kp F &kp G &kp NUMBER_7 &kt LEFT_SHIFT>,
+                <&kp X &kt LEFT_SHIFT &kp Z &kp G &kp Z &kp F &kp G &kp N7 &kt LEFT_SHIFT>,
                 <&macro_wait_time 50>,
                 <&kp NUMBER_1 &kt LEFT_SHIFT>;
 
