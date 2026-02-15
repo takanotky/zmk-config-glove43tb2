@@ -1,31 +1,24 @@
-# This file generates the GitHub Actions matrix.
-# For simple board + shield combinations, add them to the top level board and
-# shield arrays, for more control, add individual board + shield combinations
-# to the `include` property. You can also use the `cmake-args` property to
-# pass flags to the build command, `snippet` to add a Zephyr snippet, and
-# `artifact-name` to assign a name to distinguish build outputs from each other:
-#
-# board: [ "nice_nano_v2" ]
-# shield: [ "corne_left", "corne_right" ]
-# include:
-#   - board: bdn9_rev2
-#   - board: nice_nano_v2
-#     shield: reviung41
-#   - board: nice_nano_v2
-#     shield: corne_left
-#     snippet: studio-rpc-usb-uart
-#     cmake-args: -DCONFIG_ZMK_STUDIO=y
-#     artifact-name: corne_left_with_studio
-#
 ---
 include:
-- board: seeeduino_xiao_ble
-  shield: glove43tb_R rgbled_adapter
-  snippet: studio-rpc-usb-uart
-  artifact-name: glove43tb_R
-- board: seeeduino_xiao_ble
-  shield: glove43tb_L rgbled_adapter
-  artifact-name: glove43tb_L
-- board: seeeduino_xiao_ble
-  shield: settings_reset
-  artifact-name: settings_reset
+  # 1. 親機：USBドングル（nRF52840の汎用ボード名を指定）
+  - board: nrf52840dongle_nrf52840
+    shield: glove43tb_dongle
+    snippet: studio-rpc-usb-uart
+    artifact-name: dongle
+
+  # 2. 子機：右手（CENTRAL=n フラグで子機に降格）
+  - board: seeeduino_xiao_ble
+    shield: glove43tb_R rgbled_adapter
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: glove43tb_R
+
+  # 3. 子機：左手（CENTRAL=n フラグで子機に降格）
+  - board: seeeduino_xiao_ble
+    shield: glove43tb_L rgbled_adapter
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: glove43tb_L
+
+  # 4. 初期化用リセットファイル
+  - board: seeeduino_xiao_ble
+    shield: settings_reset
+    artifact-name: settings_reset
