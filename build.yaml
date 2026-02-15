@@ -1,7 +1,7 @@
 ---
 include:
-  # 1. 親機：USBドングル（nRF52840の汎用ボード名を指定）
-  - board: nrf52840dongle_nrf52840
+# 1. 親機：Raytac USBドングル（★ここを専用ボード名に変更！）
+  - board: mdbt50q_rx
     shield: glove43tb_dongle
     snippet: studio-rpc-usb-uart
     artifact-name: dongle
