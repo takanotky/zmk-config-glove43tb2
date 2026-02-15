@@ -1,13 +1,15 @@
 #include "glove43tb.dtsi"
 
 / {
-    /* 1. コンパイルエラーを防ぐためのダミーピン（仮想インターフェース）の定義 */
+    /* 1. 参照エラーを防ぐためのダミーインターフェース（仮想GPIO） */
     xiao_d: xiao_d {
+        compatible = "vnd,gpio";
         gpio-controller;
         #gpio-cells = <2>;
+        ngpios = <32>;
     };
 
-    /* 2. キースキャンをダミー（Null0）に流す設定 */
+    /* 2. キースキャンをダミー（Null0）に流すルーティング */
     chosen {
         zmk,kscan = &mock_kscan;
     };
@@ -20,7 +22,15 @@
     };
 };
 
-/* トラックボールのイベントリスナーは子機（右手）に任せるため無効化 */
+/* 3. 物理デバイスが存在しないドライバ（サービス）の起動を強制オフにする */
+&kscan0 {
+    status = "disabled";
+};
+
+&sensors {
+    status = "disabled";
+};
+
 &trackball_listener {
     status = "disabled";
 };
