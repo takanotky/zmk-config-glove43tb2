@@ -3,3 +3,6 @@ config SHIELD_GLOVE43TB_R
 
 config SHIELD_GLOVE43TB_L
     def_bool $(shields_list_contains,glove43tb_L)
+
+config SHIELD_GLOVE43TB_DONGLE
+    def_bool $(shields_list_contains,glove43tb_dongle)
